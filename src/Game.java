@@ -5,9 +5,7 @@ import java.awt.Graphics;
 import java.awt.image.BufferStrategy;
 
 public class Game extends Canvas implements Runnable {
-
     private static final long serialVersionUID = 1L;
-
     public static final int WIDTH = 1000;
     public static final int HEIGHT = WIDTH * 9/16;
 
@@ -18,14 +16,11 @@ public class Game extends Canvas implements Runnable {
     public static boolean running = false;
     private Thread gameThread;
 
-    public static void main(String[] args) {
-
+    public static void main (String[] args) {
         new Game();
-
     }
 
-    public Game() {
-
+    public Game () {
         canvasSetup();
         initialize();
         new PlayingField("Go Pong!",this);
@@ -33,7 +28,7 @@ public class Game extends Canvas implements Runnable {
         this.setFocusable(true);
     }
 
-    private void initialize() {
+    private void initialize () {
         // initialize ball
         ball = new Ball();
 
@@ -43,16 +38,14 @@ public class Game extends Canvas implements Runnable {
 
     }
 
-    private void canvasSetup() {
+    private void canvasSetup () {
         this.setPreferredSize(new Dimension(WIDTH, HEIGHT));
         this.setMaximumSize(new Dimension(WIDTH, HEIGHT));
         this.setMinimumSize(new Dimension(WIDTH, HEIGHT));
-
     }
 
     @Override
-    public void run() {
-
+    public void run () {
         this.requestFocus();
 
         //game timer
@@ -71,11 +64,9 @@ public class Game extends Canvas implements Runnable {
             }
         }
         stop();
-
-
     }
 
-    private void draw() {
+    private void draw () {
         // initialize drawing tools
         BufferStrategy buffer = this.getBufferStrategy();
         if (buffer == null) {
@@ -98,29 +89,24 @@ public class Game extends Canvas implements Runnable {
         // dispose all on screen
         g.dispose();
         buffer.show();
-
     }
 
-    private void update() {
+    private void update () {
         // update ball
         ball.update(paddle1, paddle2);
 
         // update paddles
         paddle1.update(ball);
         paddle2.update(ball);
-
     }
 
-    public void start() {
-
+    public void start () {
         gameThread = new Thread(this);
         gameThread.start();
         running = true;
-
     }
 
-    public void stop() {
-
+    public void stop () {
         try {
             gameThread.join();
             running = false;
@@ -130,10 +116,8 @@ public class Game extends Canvas implements Runnable {
         }
     }
 
-    public static int sign(double d) {
-
+    public static int sign (double d) {
         if (d>=0) {return 1;}
         else {return -1;}
     }
-
 }

@@ -2,7 +2,6 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 public class KeyPresses extends KeyAdapter {
-
     private Paddle p1;
     private boolean up1 = false;
     private boolean down1 = false;
@@ -11,27 +10,26 @@ public class KeyPresses extends KeyAdapter {
     private boolean up2 = false;
     private boolean down2 = false;
 
-    public KeyPresses(Paddle p1, Paddle p2) {
+    public KeyPresses (Paddle p1, Paddle p2) {
         this.p1 = p1;
         this.p2 = p2;
     }
 
-    public void keyPressed(KeyEvent e) {
-
+    public void keyPressed (KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_UP) {
+        if (key == KeyEvent.VK_UP) {
             p2.switchDirection(-1);
             up2 = true;
         }
-        if(key == KeyEvent.VK_DOWN) {
+        if (key == KeyEvent.VK_DOWN) {
             p2.switchDirection(1);
             down2 = true;
         }
-        if(key == KeyEvent.VK_W) {
+        if (key == KeyEvent.VK_W) {
             p1.switchDirection(-1);
             up1 = true;
         }
-        if(key == KeyEvent.VK_S) {
+        if (key == KeyEvent.VK_S) {
             p1.switchDirection(1);
             down1 = true;
         }
@@ -41,28 +39,25 @@ public class KeyPresses extends KeyAdapter {
 		}*/
     }
 
-    public void keyReleased(KeyEvent e) {
-
+    public void keyReleased (KeyEvent e) {
         int key = e.getKeyCode();
-        if(key == KeyEvent.VK_UP) {
+        if (key == KeyEvent.VK_UP) {
             up2 = false;
         }
-        if(key == KeyEvent.VK_DOWN) {
+        if (key == KeyEvent.VK_DOWN) {
             down2 = false;
         }
-        if(key == KeyEvent.VK_W) {
+        if (key == KeyEvent.VK_W) {
             up1 = false;
         }
-        if(key == KeyEvent.VK_S) {
+        if (key == KeyEvent.VK_S) {
             down1 = false;
         }
-
-        if(!up1 && !down1) {
+        if (!up1 && !down1) {
             p1.stop();
         }
-        if(!up2 && !down2) {
+        if (!up2 && !down2) {
             p2.stop();
         }
-
     }
 }

@@ -3,7 +3,6 @@ import java.awt.Font;
 import java.awt.Graphics;
 
 public class Paddle {
-
     private int x, y;
     private int vel = 0;
     private int speed = 10;
@@ -12,7 +11,7 @@ public class Paddle {
     private Color color;
     private boolean left;
 
-    public Paddle(Color c, boolean left) {
+    public Paddle (Color c, boolean left) {
         color = c;
         this.left = left;
         if (this.left) {
@@ -24,12 +23,11 @@ public class Paddle {
         y = Game.HEIGHT/2 - height/2;
     }
 
-    public void addPoint() {
+    public void addPoint () {
         score++;
     }
 
-    public void draw(Graphics g) {
-
+    public void draw (Graphics g) {
         // draw paddle
         g.setColor(color);
         g.fillRect(x, y, width, height);
@@ -41,51 +39,42 @@ public class Paddle {
         int strWidth = g.getFontMetrics(font).stringWidth(scoreText);
         int padding = 25;
 
-        if(left) {
+        if (left) {
             sx = Game.WIDTH/2 - strWidth - padding;
         }
         else {
             sx = Game.WIDTH/2 + padding;
         }
-
         g.setFont(font);
         g.drawString(scoreText, sx, 50);
-
     }
 
-    public void update(Ball ball) {
+    public void update (Ball ball) {
         // paddle movement
-        if(y > Game.HEIGHT - height) { y = Game.HEIGHT - height; }
-        else if(y <0) { y = 0; }
+        if (y > Game.HEIGHT - height) { y = Game.HEIGHT - height; }
+        else if (y <0) { y = 0; }
         else { y += vel; }
 
         int ballX = ball.getX();
         int ballY = ball.getY();
 
         // paddle hits
-        if(left) {
-            if(ballX <= width && ballY >= y-Ball.SIZE && ballY <= y+height) {
+        if (left) {
+            if (ballX <= width && ballY >= y-Ball.SIZE && ballY <= y+height) {
+                ball.changeXDir();
+            }
+        } else {
+            if (ballX >= x - Ball.SIZE && ballY >= y-Ball.SIZE && ballY <= y+height) {
                 ball.changeXDir();
             }
         }
-        else {
-            if(ballX >= x - Ball.SIZE && ballY >= y-Ball.SIZE && ballY <= y+height) {
-                ball.changeXDir();
-            }
-        }
-
     }
 
-    public void switchDirection(int dir) {
-
+    public void switchDirection (int dir) {
         vel = speed * dir;
-
     }
 
-    public void stop() {
-
+    public void stop () {
         vel = 0;
-
     }
-
 }
